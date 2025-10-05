@@ -38,10 +38,9 @@ body {
     width: var(--sidebar-width);
     background-color: var(--sidebar-bg);
     color: white;
-    height: 100vh;
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 20px 0 120px 0; /* Added bottom padding for logout */
     position: fixed;
     top: 0;
     left: 0;
@@ -130,7 +129,7 @@ body {
 
 .sidebar-footer {
     position: absolute;
-    bottom: 50px;
+    bottom: 0;
     left: 0;
     right: 0;
     padding: 10px 0 10px 0;
@@ -634,3 +633,4 @@ p {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 
 }
+
