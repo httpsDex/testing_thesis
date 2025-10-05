@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeritUp-Client Page</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      background-color: #6a0c0c;
+      width: 250px;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      margin: 10px 0;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .sidebar a:hover {
+      background-color: #880f0f;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      background-color: #444;
+      border-radius: 50%;
+    }
+
+    .main {
+      flex: 1;
+      background-color: #f4f4f4;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th, .table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 2px solid #ddd;
+      border-right: 2px solid #ddd;
+    }
+
+    .badge {
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: white;
+    }
+
+    .accepted { background-color: green; }
+    .pending { background-color: orange; }
+    .rejected { background-color: red; }
+
+    
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    
+    <div>
+      <h2>Merit Evaluation</h2>
+      <div><a href="#">Dashboard</a></div>
+      <div><a href="#">Peer Evaluation</a></div>
+      <div><a href="#">Submit Certificate</a></div>
+      <div><a href="#">Evaluation History</a></div>
+    </div>
+
+    <div class="user-info">
+      <div class="avatar"></div>
+      <div>Welcome, Employee</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="section-title">Your Dashboard</div>
+
+    <div class="card">
+      <h3>Evaluation Summary</h3>
+      <p><strong>Overall Score:</strong> </p>
+      <table class="table">
+        <tr bgcolor = "grey"><th>Category</th><th>Score</th></tr>
+        <tr><td>Productivity (25 points)</td><td></td></tr>
+        <tr><td>Attitude (25 points)</td><td></td></tr>
+        <tr><td>Promotional Competencies (25 points)</td><td></td></tr>
+        <tr><td>Attendance (15 points)</td><td></td></tr>
+        <tr><td>Professional Advancements (3 points)</td><td></td></tr>
+        <tr><td>Institutional Involvement and Participation (2 points)</td><td></td></tr>
+        <tr><td>Community Involvement and Participation (3 points)</td><td></td></tr>
+        <tr><td>Work Experience (2 points) <small> (.16 points for every year of service) </small> </td><td></td></tr>
+        <!-- <tr><td>Technical Skills 30%</td><td></td></tr>
+        <tr><td>Decision Making Skills 30%</td><td></td></tr>
+        <tr><td>Leadership Skills 20%</td><td></td></tr>
+        <tr><td>Human Relation and Communication Skills 20%</td><td></td></tr> -->
+        
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Evaluation Summary</h3>
+      <p><strong>Overall Score:</strong> </p>
+      <table class="table">
+
+        <tr bgcolor = "grey">
+          <th>
+            A. Productivity (25 points)
+          </th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+        </tr>
+
+        <tr><td>1. Quality of Work</td>
+          <td><input type="radio" name="quality" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="quality" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="quality" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="quality" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="quality" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>2. Quantity of Work</td>
+          <td><input type="radio" name="service" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="service" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="service" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="service" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="service" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>3. Job Knowledge</td>
+          <td><input type="radio" name="job_knowledge" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="job_knowledge" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="job_knowledge" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="job_knowledge" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="job_knowledge" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>4. Initiative</td>
+          <td><input type="radio" name="Initiative" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="Initiative" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="Initiative" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="Initiative" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="Initiative" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>5. Reliability</td>
+          <td><input type="radio" name="reliability" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="reliability" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="reliability" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="reliability" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="reliability" value="5" class="form-check-input"></td>
+        </tr>
+        
+        
+
+
+        <tr bgcolor = "grey">
+          <th>
+            B. Attitude (25 points)
+          </th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+        </tr>
+
+        <tr><td>1. Job Attitude</td>
+          <td><input type="radio" name="job_attitude" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="job_attitude" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="job_attitude" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="job_attitude" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="job_attitude" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>2. Work Habits</td>
+          <td><input type="radio" name="work_habits" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="work_habits" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="work_habits" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="work_habits" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="work_habits" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>3. Personal Relation with Others</td>
+          <td><input type="radio" name="prwo" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="prwo" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="prwo" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="prwo" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="prwo" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>4. Integrity</td>
+          <td><input type="radio" name="integrity" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="integrity" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="integrity" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="integrity" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="integrity" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>5.Self Discipline</td>
+          <td><input type="radio" name="self_discipline" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="self_discipline" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="self_discipline" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="self_discipline" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="self_discipline" value="5" class="form-check-input"></td>
+        </tr>
+
+
+
+
+        <tr bgcolor = "grey">
+          <th>
+            C. Promotional Competence (25 points)
+          </th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+        </tr>
+
+        <tr><td>1. Ability to Learn</td>
+          <td><input type="radio" name="ability_to_learn" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="ability_to_learn" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="ability_to_learn" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="ability_to_learn" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="ability_to_learn" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>2. Ability to Organise</td>
+          <td><input type="radio" name="ability_to_organize" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="ability_to_organize" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="ability_to_organize" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="ability_to_organize" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="ability_to_organize" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>3. Cooperation</td>
+          <td><input type="radio" name="cooperation" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="cooperation" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="cooperation" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="cooperation" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="cooperation" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>4. Development-Orientation</td>
+          <td><input type="radio" name="development_orientation" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="development_orientation" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="development_orientation" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="development_orientation" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="development_orientation" value="5" class="form-check-input"></td>
+        </tr>
+
+        <tr><td>5. Planning Capability</td>
+          <td><input type="radio" name="planning_capability" value="1" class="form-check-input"></td> 
+          <td><input type="radio" name="planning_capability" value="2" class="form-check-input"></td>
+          <td><input type="radio" name="planning_capability" value="3" class="form-check-input"></td>
+          <td><input type="radio" name="planning_capability" value="4" class="form-check-input"></td> 
+          <td><input type="radio" name="planning_capability" value="5" class="form-check-input"></td>
+        </tr>
+      </table>
+    </div>
+
+
+    <div class="card">
+      <h3>Rank History</h3>
+      <table class="table">
+        <tr bgcolor = "grey"><th>Year</th><th>Rank</th></tr>
+        <tr><td>SY 2021-2022 1st Sem</td><td></td></tr>
+        <tr><td>SY 2020-2021 2nd Sem</td><td></td></tr>
+        <tr><td>SY 2020-2021 1st Sem</td><td></td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Your Certificates</h3>
+      <table class="table">
+        <tr bgcolor = "grey"><th>Title</th><th>Type</th><th>Status</th><th>Date Submitted</th></tr>
+        <tr><td>AI in Education</td><td>Seminar</td><td><span class="badge accepted">Accepted</span></td><td>Jan 12, 2025</td></tr>
+        <tr><td>Team Building</td><td>Semonar</td><td><span class="badge rejected">Rejected</span></td><td>Feb 15, 2025</td></tr>
+        <tr><td>Blended Learning</td><td>Certificate</td><td><span class="badge pending">Pending</span></td><td>Mar 2, 2025</td></tr>
+      </table>
+      <br>
+      <div>
+        <button class="subnewcert">Submit New Certificate</button>
+      </div>
+      
+      
+    </div>
+
+    <div class="card">
+      <h3>Assigned Peer Evaluations</h3>
+      <ul>
+        <li>Evaluate <strong>Juan Dela Cruz</strong> - <button>Start</button></li>
+        <li>Evaluate <strong>Pedro Penduko</strong> - <button>Start</button></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

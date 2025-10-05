@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MeritUp Main Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/adminpagestyle.css" />
+</head>
+<body>
+    <button class="hamburger" id="hamburgerBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Toast Notification -->
+    <div class="toast-container">
+        <div id="saveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+            <div class="toast-header">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Evaluation saved successfully!
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="content-wrapper">
+            <div class="sidebar" id="sidebar">
+                <div class="avatar">👤</div>
+                <div class="name" id="userName"></div>
+                <div class="role" id="userRole"></div>
+                <hr/>
+
+                <div class="sidebar-content">
+                    <button id="dashboardLink" class="active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button id="evaluationLink" class="teaching-only">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Evaluation</span>
+                    </button>
+                    <button id="non-teaching_evaluationLink" class="non-teaching-only">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Non-Teaching Evaluation</span>
+                    </button>
+                    <button id="peerEvaluationLink" class="non-teaching-only">
+                        <i class="fas fa-users"></i>
+                        <span>Peer Evaluation</span>
+                    </button>
+                    <button id="summaryLink">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Summary Reports</span>
+                    </button>
+                    <button id="rankingLink">
+                        <i class="fas fa-trophy"></i>
+                        <span>Employee Ranking</span>
+                    </button>
+                    <button id="certificateLink">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certificate Acceptance</span>
+                    </button>
+                    <button id="employee_managementLink">
+                        <i class="fas fa-users"></i>
+                        <span>Employee Management</span>
+                    </button>
+                </div>
+                <div class="sidebar-footer">
+                    <button id="logoutBtn" class="logout">
+                        <i class="fas fa-sign-out-alt"></i>Log Out
+                    </button>
+                </div>
+                
+            </div>
+
+            <div class="content">
+                <div class="inner-content">
+                    <!-- Dashboard Div -->
+                    <div id="dashboard" class="content-section">
+                        <!-- Welcome Card -->
+                        <div class="card mb-4 welcome-card">
+                            <div class="card-body d-flex align-items-center">
+                                <div>
+                                    <h2 class="card-title mb-2" id="welcomeMessage">Welcome back, John Doe!</h2>
+                                    <h6 class="card-text" id="userDepartment">Department Head • Computer Science Department</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Statistics -->
+                        <div class="row mb-4">
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="stat-icon bg-primary text-white">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h4 class="mb-0" id="handledEmployees">0</h4>
+                                                <p class="text-muted mb-0">Handled Employees</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="stat-icon bg-warning text-white">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h4 class="mb-0" id="pendingEvaluations">0</h4>
+                                                <p class="text-muted mb-0">Pending Evaluations</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="stat-icon bg-success text-white">
+                                                <i class="fas fa-check-circle"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h4 class="mb-0" id="completedEvaluations">0</h4>
+                                                <p class="text-muted mb-0">Completed Evaluations</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card stat-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="stat-icon bg-info text-white">
+                                                <i class="fas fa-certificate"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h4 class="mb-0" id="pendingCertificates">0</h4>
+                                                <p class="text-muted mb-0">Pending Certificates</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Links -->
+                        <div class="row">
+                            <div class="col-md-4 mb-4 teaching-only">
+                                <div class="card quick-link-card h-100">
+                                    <div class="card-body text-center">
+                                        <div class="quick-link-icon">
+                                            <i class="fas fa-clipboard-list fa-3x text-primary mb-3"></i>
+                                        </div>
+                                        <h5 class="card-title">Evaluations</h5>
+                                        <p class="card-text">Manage and review employee evaluations</p>
+                                        <a href="#" class="btn btn-primary" id="gotoEvaluation">
+                                            <i class="fas fa-arrow-right me-1"></i> Go to Evaluations
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4 non-teaching-only">
+                                <div class="card quick-link-card h-100">
+                                    <div class="card-body text-center">
+                                        <div class="quick-link-icon">
+                                            <i class="fas fa-clipboard-list fa-3x text-primary mb-3"></i>
+                                        </div>
+                                        <h5 class="card-title">Non-Teaching Evaluations</h5>
+                                        <p class="card-text">Manage and review non-teaching employee evaluations</p>
+                                        <a href="#" class="btn btn-primary" id="gotoNonTeachingEvaluation">
+                                            <i class="fas fa-arrow-right me-1"></i> Go to Evaluations
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4 non-teaching-only">
+                                <div class="card quick-link-card h-100">
+                                    <div class="card-body text-center">
+                                        <div class="quick-link-icon">
+                                            <i class="fas fa-users fa-3x text-info mb-3"></i>
+                                        </div>
+                                        <h5 class="card-title">Peer Evaluation</h5>
+                                        <p class="card-text">Assign and manage peer evaluations</p>
+                                        <a href="#" class="btn btn-info" id="gotoPeerEvaluation">
+                                            <i class="fas fa-users me-1"></i> Manage Peer Evaluation
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card quick-link-card h-100">
+                                    <div class="card-body text-center">
+                                        <div class="quick-link-icon">
+                                            <i class="fas fa-chart-bar fa-3x text-info mb-3"></i>
+                                        </div>
+                                        <h5 class="card-title">Reports</h5>
+                                        <p class="card-text">View summary reports and analytics</p>
+                                        <a href="#" class="btn btn-info" id="gotoSummary">
+                                            <i class="fas fa-chart-line me-1"></i> View Reports
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card quick-link-card h-100">
+                                    <div class="card-body text-center">
+                                        <div class="quick-link-icon">
+                                            <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+                                        </div>
+                                        <h5 class="card-title">Rankings</h5>
+                                        <p class="card-text">See employee rankings and performance</p>
+                                        <a href="#" class="btn btn-warning" id="gotoRanking">
+                                            <i class="fas fa-medal me-1"></i> View Rankings
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- evaluation div -->
+                    <div id="evaluation" class="content-section">
+                        <div class="section-header">
+                            <h2>Employee Evaluation Form</h2>
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                <div>
+                                    <label class="form-label me-2">Evaluation Period:</label>
+                                    <select class="form-select d-inline-block" style="width: 140px;" id="evaluationPeriod">
+                                        <option>1st Sem 2025</option>
+                                        <option>2nd Sem 2025</option>
+                                        <option selected>1st Sem 2026</option>
+                                        <option>2nd Sem 2026</option>
+                                    </select>
+                                </div>
+                                <div class="btn-group ms-auto">
+                                    <button class="btn btn-success" id="saveBtn">
+                                        <i class="fas fa-check-circle me-1"></i> Finalize
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-dark header-span">Faculty Evaluation Inputs</span>
+                                <div class="input-group input-group-sm me-2 d-flex align-items-center" style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="Search employee..." id="evaluationSearch">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Status</th>
+                                                <th>Total Score</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="evaluationTableBody">
+                                             
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="pagination-info d-flex align-items-center">
+                                        Showing 
+                                        <select class="form-select form-select-sm d-inline-block mx-2" style="width: 80px;">
+                                            <option selected>10</option>
+                                            <option>25</option>
+                                            <option>50</option>
+                                            <option>100</option>
+                                        </select>
+                                        of <span id="evaluationCount">0</span> faculty members
+                                    </div>
+                                    <div class="pagination-controls">
+                                        <nav>
+                                            <ul class="pagination pagination-sm mb-0">
+                                                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Non-Teaching Evaluation Div -->
+                    <div id="non-teaching_evaluation" class="content-section">
+                        <div class="section-header">
+                            <h2>Non-Teaching Evaluation Form</h2>
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                <div>
+                                    <label class="form-label me-2">Evaluation Period:</label>
+                                    <select class="form-select d-inline-block" style="width: 140px;" id="nonTeachingEvaluationPeriod">
+                                        <option>1st Sem 2025</option>
+                                        <option>2nd Sem 2025</option>
+                                        <option selected>1st Sem 2026</option>
+                                        <option>2nd Sem 2026</option>
+                                    </select>
+                                </div>
+                                <div class="btn-group ms-auto">
+                                    <button class="btn btn-success" id="saveNonTeachingBtn">
+                                        <i class="fas fa-check-circle me-1"></i> Finalize
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-dark header-span">Non-Teaching Evaluation Inputs</span>
+                                <div class="input-group input-group-sm me-2 d-flex align-items-center" style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="Search employee..." id="nonTeachingEvaluationSearch">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Position</th>
+                                                <th>Status</th>
+                                                <th>Total Score</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="nonTeachingTableBody">
+                                             
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="pagination-info d-flex align-items-center">
+                                        Showing 
+                                        <select class="form-select form-select-sm d-inline-block mx-2" style="width: 80px;">
+                                            <option selected>10</option>
+                                            <option>25</option>
+                                            <option>50</option>
+                                            <option>100</option>
+                                        </select>
+                                        of <span id="nonTeachingCount">0</span> faculty members
+                                    </div>
+                                    <div class="pagination-controls">
+                                        <nav>
+                                            <ul class="pagination pagination-sm mb-0">
+                                                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Peer Evaluation Assignments -->
+                    <div id="peerEvaluation" class="content-section">
+                        <div class="section-header">
+                            <h2>Peer Evaluation Assignments</h2>
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                <div>
+                                    <label class="form-label me-2">Evaluation Period:</label>
+                                    <select class="form-select d-inline-block" style="width: 140px;" id="peerEvaluationPeriod">
+                                        <option>1st Sem 2025</option>
+                                        <option>2nd Sem 2025</option>
+                                        <option selected>1st Sem 2026</option>
+                                        <option>2nd Sem 2026</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#assignPeerModal">
+                                    <i class="fas fa-plus me-1"></i> Assign Peer Evaluation
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-dark header-span">Peer Evaluation Assignments</span>
+                                <div class="input-group input-group-sm me-2 d-flex align-items-center" style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="Search employee..." id="peerEvaluationSearch">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Department Head</th>
+                                                <th>Same Department Peer</th>
+                                                <th>External Department Peer</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="peerEvaluationTableBody">
+                                             
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="pagination-info d-flex align-items-center">
+                                        Showing 
+                                        <select class="form-select form-select-sm d-inline-block mx-2" style="width: 80px;">
+                                            <option selected>10</option>
+                                            <option>25</option>
+                                            <option>50</option>
+                                            <option>100</option>
+                                        </select>
+                                        of <span id="peerEvaluationCount">0</span> assignments
+                                    </div>
+                                    <div class="pagination-controls">
+                                        <nav>
+                                            <ul class="pagination pagination-sm mb-0">
+                                                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Summary -->
+                    <div id="summary" class="content-section">
+                        <div class="section-header">
+                            <h2>Evaluation Reports</h2>
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                <div>
+                                    <label class="form-label me-2">Evaluation Period:</label>
+                                    <select class="form-select d-inline-block" style="width: auto;">
+                                        <option>1st Sem 2025</option>
+                                        <option>2nd Sem 2025</option>
+                                        <option selected>1st Sem 2026</option>
+                                        <option>2nd Sem 2026</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-dark header-span">Employee Evaluation Reports</span>
+                                <div class="input-group input-group-sm me-2 d-flex align-items-center" style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="Search employee..." id="summarySearch">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Total Score</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="summaryTableBody">
+                                            <!-- Content will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="pagination-container">
+                                    <div class="pagination-info d-flex align-items-center">
+                                        Showing 
+                                        <select class="form-select form-select-sm d-inline-block mx-2" style="width: 80px;">
+                                            <option selected>10</option>
+                                            <option>25</option>
+                                            <option>50</option>
+                                            <option>100</option>
+                                        </select>
+                                        of <span id="summaryCount">0</span> faculty members
+                                    </div>
+                                    <div class="pagination-controls">
+                                        <nav>
+                                            <ul class="pagination pagination-sm mb-0">
+                                                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    
+                    <!-- Employee Ranking -->
+                    <div id="ranking" class="content-section">
+                        <div class="section-header">
+                            <h2>Employee Rankings</h2>
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                <div>
+                                    <label class="form-label me-2">Evaluation Period:</label>
+                                    <select class="form-select d-inline-block" style="width: auto;">
+                                        <option>1st Sem 2025</option>
+                                        <option>2nd Sem 2025</option>
+                                        <option selected>1st Sem 2026</option>
+                                        <option>2nd Sem 2026</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-dark header-span">Ranking History</span>
+                                <div class="input-group input-group-sm" style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="Search employee..." id="rankingSearch">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Total Score</th>
+                                                <th>Promotion Eligibility</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="rankingTableBody">
+                                            <!-- Content will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="pagination-info d-flex align-items-center">
+                                        Showing 
+                                        <select class="form-select form-select-sm d-inline-block mx-2" style="width: 80px;">
+                                            <option selected>10</option>
+                                            <option>25</option>
+                                            <option>50</option>
+                                            <option>100</option>
+                                        </select>
+                                        of <span id="rankingCount">0</span> faculty members
+                                    </div>
+                                    <div class="pagination-controls">
+                                        <nav>
+                                            <ul class="pagination pagination-sm mb-0">
+                                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificate Verification -->
+                    <div id="certificate" class="content-section">
+                        <div class="section-header">
+                            <h2>Certificate Verification</h2>
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                <div>
+                                    <label class="form-label me-2">Filter by Type:</label>
+                                    <select class="form-select d-inline-block" style="width: auto;">
+                                        <option>All Types</option>
+                                        <option>---</option>
+                                        <option>---</option>
+                                        <option>---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-dark header-span">Pending Certificate Submissions</span>
+                                <div class="input-group input-group-sm ms-auto" style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="Search..." id="certificateSearch">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Certificate Type</th>
+                                                <th>Event Name</th>
+                                                <th>Date</th>
+                                                <th>Certificate</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="certificateTableBody">
+                                            <!-- Content will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="pagination-info d-flex align-items-center">
+                                        Showing 
+                                        <select class="form-select form-select-sm d-inline-block mx-2" style="width: 80px;">
+                                            <option selected>10</option>
+                                            <option>25</option>
+                                            <option>50</option>
+                                            <option>100</option>
+                                        </select>
+                                        of <span id="certificateCount">0</span> faculty members
+                                    </div>
+                                    <div class="pagination-controls">
+                                        <nav>
+                                            <ul class="pagination pagination-sm mb-0">
+                                                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- employee_management -->
+
+                    <div id="employee_management" class="content-section">
+                        <div class="section-header">
+                            <h2>Employee Management</h2>
+                            <div class="d-flex flex-wrap gap-2 align-items-center">
+                                <div>
+                                    <label class="form-label me-2">Filter by Type:</label>
+                                    <select class="form-select d-inline-block" style="width: auto;">
+                                        <option>All Types</option>
+                                        <option>Seminars</option>
+                                        <option>Trainings</option>
+                                        <option>Workshops</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                                    <i class="fas fa-plus me-1"></i> Add New Employee
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-dark header-span">Employee List</span>
+                                <div class="input-group input-group-sm ms-auto" style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="Search employees..." id="employeeSearch">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Department</th>
+                                                <th>Employment Type</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="employeeTableBody">
+                                            <!-- Content will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="pagination-info d-flex align-items-center">
+                                        Showing 
+                                        <select class="form-select form-select-sm d-inline-block mx-2" style="width: 80px;">
+                                            <option selected>10</option>
+                                            <option>25</option>
+                                            <option>50</option>
+                                            <option>100</option>
+                                        </select>
+                                        of <span id="employeeCount">0</span> employees
+                                    </div>
+                                    <div class="pagination-controls">
+                                        <nav>
+                                            <ul class="pagination pagination-sm mb-0">
+                                                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assign Peer Evaluation Modal -->
+    <div class="modal fade" id="assignPeerModal" tabindex="-1" aria-labelledby="assignPeerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignPeerModalLabel">Assign Peer Evaluation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="assignPeerForm">
+                        <div class="mb-3">
+                            <label for="employeeToEvaluate" class="form-label">Employee to Evaluate</label>
+                            <select class="form-select" id="employeeToEvaluate" required>
+                                <option value="">Select Employee</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="departmentHead" class="form-label">Department Head</label>
+                            <select class="form-select" id="departmentHead" required>
+                                <option value="">Select Department Head</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sameDepartmentPeer" class="form-label">Same Department Peer</label>
+                            <select class="form-select" id="sameDepartmentPeer" required>
+                                <option value="">Select Same Department Peer</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="externalDepartmentPeer" class="form-label">External Department Peer</label>
+                            <select class="form-select" id="externalDepartmentPeer" required>
+                                <option value="">Select External Department Peer</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="evaluationPeriod" class="form-label">Evaluation Period</label>
+                            <select class="form-select" id="peerEvaluationPeriodModal" required>
+                                <option value="1st Sem 2025">1st Sem 2025</option>
+                                <option value="2nd Sem 2025">2nd Sem 2025</option>
+                                <option value="1st Sem 2026" selected>1st Sem 2026</option>
+                                <option value="2nd Sem 2026">2nd Sem 2026</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="savePeerAssignment">Save Assignment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- summary modal -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Evaluation Report - Dr. Sarah Johnson</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                    <!-- Employee Info -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p><strong>Employee:</strong> Dr. Sarah Johnson</p>
+                            <p><strong>Department:</strong> Computer Science</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Evaluation Period:</strong> Q3 2023</p>
+                        </div>
+                    </div>
+
+                    <!-- Evaluation Table (Scores Only) -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0">Evaluation Breakdown</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Criteria</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Teaching Competence</td>
+                                            <td>19</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Effectiveness in Services</td>
+                                            <td>18</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Professional Growth</td>
+                                            <td>14</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Teaching Experience</td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Research Output</td>
+                                            <td>9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Community Service</td>
+                                            <td>9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Leadership</td>
+                                            <td>10</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two-Column Summary Cards -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Promotion Status</h6>
+                                </div>
+                                <div class="card-body">
+                                    <span class="badge bg-success mb-2"><i class="fas fa-check-circle me-1"></i> Eligible</span>
+                                    <p class="mb-1">Next promotion cycle: <strong>2nd Sem 2026</strong></p>
+                                    <p class="text-muted small mb-0">Employee has met all promotion criteria.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Merit Bonus</h6>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="text-success mb-1">₱???</h4>
+                                    <p class="mb-2">Awarded based on evaluation performance.</p>
+                                    <div class="alert alert-info mb-0">
+                                        <i class="fas fa-info-circle me-2"></i> Bonus will be processed in the next payroll.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-download me-1"></i> Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Add Employee Modal -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEmployeeModalLabel">Add New Employee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addEmployeeForm">
+                        <div class="mb-3">
+                            <label for="employeeName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="employeeName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeDepartment" class="form-label">Department</label>
+                            <select class="form-select" id="employeeDepartment" required>
+                                <option value="">Select Department</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Business">Business</option>
+                                <option value="Arts">Arts</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeType" class="form-label">Employment Type</label>
+                            <select class="form-select" id="employeeType" required>
+                                <option value="">Select Type</option>
+                                <option value="Full-Time">Full-Time</option>
+                                <option value="Part-Time">Part-Time</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="employeeEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeePhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="employeePhone">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveEmployeeBtn">Save Employee</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Edit Employee Modal -->
+    <div class="modal fade" id="editEmployeeModal" tabindex="-1" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editEmployeeModalLabel">Edit Employee Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editEmployeeForm">
+                        <input type="hidden" id="editEmployeeId">
+                        <div class="mb-3">
+                            <label for="editEmployeeName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="editEmployeeName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmployeeDepartment" class="form-label">Department</label>
+                            <select class="form-select" id="editEmployeeDepartment" required>
+                                <option value="">Select Department</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Business">Business</option>
+                                <option value="Arts">Arts</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmployeeType" class="form-label">Employment Type</label>
+                            <select class="form-select" id="editEmployeeType" required>
+                                <option value="">Select Type</option>
+                                <option value="Full-Time">Full-Time</option>
+                                <option value="Part-Time">Part-Time</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmployeeEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="editEmployeeEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmployeePhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="editEmployeePhone">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="editEmployeeStatus">
+                                <label class="form-check-label" for="editEmployeeStatus">Active Employee</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="updateEmployeeBtn">Update Employee</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Teaching Evaluation Modal -->
+    <div class="modal fade" id="evaluateModal" tabindex="-1" aria-labelledby="evaluateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="evaluateModalLabel">Employee Evaluation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="employee-info mb-4">
+                        <h6 id="modalEmployeeName"></h6>
+                        <p class="text-muted" id="modalEmployeeRole"></p>
+                    </div>
+                    <form id="evaluationForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Teaching Competence <small class="text-muted">(Max 20 pts)</small></label>
+                                <input type="number" class="form-control" id="teachingCompetence" min="0" max="20" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Effectiveness in Services <small class="text-muted">(Max 15 pts)</small></label>
+                                <input type="number" class="form-control" id="effectiveness" min="0" max="15" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Professional Growth <small class="text-muted">(Max 13 pts)</small></label>
+                                <input type="number" class="form-control" id="professionalGrowth" min="0" max="13" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Teaching Experience <small class="text-muted">(Max 2 pts)</small></label>
+                                <input type="number" class="form-control" id="teachingExperience" min="0" max="2" required>
+                            </div>
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>Total Score: </strong><span id="totalScore">0</span> / 50
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="saveEvaluation">Save Evaluation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Non-Teaching Evaluation Modal -->
+    <div class="modal fade" id="evaluateNonTeachingModal" tabindex="-1" aria-labelledby="evaluateNonTeachingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="evaluateNonTeachingModalLabel">Non-Teaching Employee Evaluation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="employee-info mb-4">
+                        <h6 id="modalNonTeachingEmployeeName">Employee Name</h6>
+                        <p class="text-muted" id="modalEmployeePosition">Position</p>
+                    </div>
+                    <form id="nonTeachingEvaluationForm">
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Productivity <small class="text-muted">(Max 25 pts)</small></label>
+                                <input type="number" class="form-control" id="productivity" min="0" max="25" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Attitude <small class="text-muted">(Max 25 pts)</small></label>
+                                <input type="number" class="form-control" id="attitude" min="0" max="25" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Promotional Competence <small class="text-muted">(Max 25 pts)</small></label>
+                                <input type="number" class="form-control" id="promotionalCompetence" min="0" max="25" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Attendance <small class="text-muted">(Max 25 pts)</small></label>
+                                <input type="number" class="form-control" id="attendance" min="0" max="25" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Professional Advancement <small class="text-muted">(Max 3 pts)</small></label>
+                                <input type="number" class="form-control" id="professionalAdvancement" min="0" max="3" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Institutional Involvement <small class="text-muted">(Max 2 pts)</small></label>
+                                <input type="number" class="form-control" id="institutionalInvolvement" min="0" max="2" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Community Involvement <small class="text-muted">(Max 3 pts)</small></label>
+                                <input type="number" class="form-control" id="communityInvolvement" min="0" max="3" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Work Experience <small class="text-muted">(Max 2 pts)</small></label>
+                                <input type="number" class="form-control" id="workExperience" min="0" max="2" required>
+                            </div>
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>Total Score: </strong><span id="nonTeachingTotalScore">0</span> / 110
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="saveNonTeachingEvaluation">Save Evaluation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Employee History Modal -->
+    <div class="modal fade" id="employeeHistoryModal" tabindex="-1" aria-labelledby="employeeHistoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="employeeHistoryModalLabel">Employee Evaluation History</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="employee-info mb-4">
+                        <h6 id="historyEmployeeName">Employee Name</h6>
+                        <p class="text-muted">Complete evaluation history and ranking progression</p>
+                    </div>
+                    
+                    <!-- Semester Evaluations -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6 class="mb-0">Semester Evaluations</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Period</th>
+                                            <th>Total Score</th>
+                                            <th>Rank</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1st Sem 2026</td>
+                                            <td>94.0</td>
+                                            <td>1st</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2nd Sem 2025</td>
+                                            <td>91.5</td>
+                                            <td>2nd</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1st Sem 2025</td>
+                                            <td>89.2</td>
+                                            <td>3rd</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3-Year Rankings -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">3-Year Ranking History</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Period</th>
+                                            <th>Average Score</th>
+                                            <th>Overall Rank</th>
+                                            <th>Promotion Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2024-2026</td>
+                                            <td>91.6</td>
+                                            <td>1st</td>
+                                            <td><span class="badge bg-success">Eligible</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2021-2023</td>
+                                            <td>87.3</td>
+                                            <td>3rd</td>
+                                            <td><span class="badge bg-info">Promoted</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-download me-1"></i> Export History
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Certificate View Modal -->
+    <div class="modal fade" id="certificateViewModal" tabindex="-1" aria-labelledby="certificateViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="certificateViewModalLabel">Certificate Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Certificate Image Placeholder -->
+                            <div class="certificate-preview">
+                                <div class="certificate-placeholder">
+                                    <i class="fas fa-certificate fa-5x text-primary mb-3"></i>
+                                    <p class="text-muted">Certificate Image</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="certificate-details">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Employee Name:</label>
+                                    <p id="certEmployeeName">John Doe</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Certificate Type:</label>
+                                    <p id="certType">Seminar</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Event Name:</label>
+                                    <p id="certEventName">Advanced Teaching Methods</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Date:</label>
+                                    <p id="certDate">2023-10-15</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Duration:</label>
+                                    <p id="certDuration">40 hours</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Organizer:</label>
+                                    <p id="certOrganizer">Department of Education</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success accept-certificate">
+                        <i class="fas fa-check me-1"></i> Accept
+                    </button>
+                    <button type="button" class="btn btn-danger reject-certificate">
+                        <i class="fas fa-times me-1"></i> Reject
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/adminpage.js"></script>
+</body>
+</html>
