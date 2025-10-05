@@ -130,7 +130,7 @@ body {
 
 .sidebar-footer {
     position: absolute;
-    bottom: 0;
+    bottom: 50px;
     left: 0;
     right: 0;
     padding: 10px 0 10px 0;
@@ -632,4 +632,5 @@ p {
 
 .toast {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
 }
