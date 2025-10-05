@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const response = await fetch("http://localhost:1804/api/auth/login", {
+      const response = await fetch("https://testing-server-qtm8.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ usernameOrEmail, password }),
@@ -63,3 +63,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
